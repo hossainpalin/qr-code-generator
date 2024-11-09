@@ -54,9 +54,9 @@ export default function Accordion({
         </svg>
       </div>
 
-      <div className={isOpen ? 'accordion-show' : 'accordion'}>{children}</div>
+      {/* <div className={isOpen ? 'accordion-show' : 'accordion'}>{children}</div> */}
 
-      {/* <div
+      <div
         className={cn(
           'grid overflow-hidden',
           isOpen && 'grid-rows-1 opacity-100',
@@ -65,7 +65,7 @@ export default function Accordion({
         <div className={cn('w-full bg-gray-100 p-3', !isOpen && 'hidden')}>
           {children}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

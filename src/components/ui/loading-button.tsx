@@ -18,7 +18,7 @@ const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(
         disabled={disabled || loading}
         {...props}
         className={cn(
-          'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white outline-none transition-colors hover:bg-blue-600 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+          'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-blue-500 px-4 py-2.5 text-sm font-medium text-white outline-none transition-colors hover:bg-blue-600 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 w-full',
           className
         )}
         type={type}>
