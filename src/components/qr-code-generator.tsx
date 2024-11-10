@@ -1,39 +1,50 @@
-import { data, QRMode } from '@/data';
-import { cn } from '@/lib/utils';
+import { useQRCode } from '@/hooks/use-qrcode';
+import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
-import URLInput from './qr-code-mode/url';
+import Accordion from './ui/accordion';
+import QRCodeAction from './qr-code-action';
 
 export default function QRCodeGenerator() {
-  const [selectedType, setSelectedType] = useState('URL');
+  const [openIndex, setOpenIndex] = useState<number | null>(1);
+
+  const { qrCodeInput } = useQRCode();
+
+  const handleAccordionClick = (index: number) => {
+    if (openIndex === index) {
+      return setOpenIndex(null);
+    }
+
+    setOpenIndex(index);
+  };
 
   return (
     <>
-      <div className="w-full">
-        <ul className="flex flex-wrap gap-x-8 gap-y-3 w-full">
-          {data.map(({ id, label, icon: Icon }: QRMode) => (
-            <li
-              onClick={() => setSelectedType(label)}
-              key={id}
-              className={cn(
-                'flex w-32 items-center gap-2 text-gray-500 border-b px-2 py-0.5 cursor-pointer hover:bg-gray-200 border-gray-300 font-medium text-sm',
-                label === selectedType && 'bg-gray-200 text-gray-600'
-              )}>
-              <span>
-                <Icon size={16} />
-              </span>
-              <span>{label}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="w-full bg-blue-100 rounded-lg justify-center items-center flex p-8">
+        <QRCodeSVG value={qrCodeInput} size={180} />
       </div>
+      <div className="w-full my-5 flex flex-col gap-3">
+        <Accordion
+          title="Frame"
+          isOpen={openIndex === 1}
+          onClick={() => handleAccordionClick(1)}>
+          <>Test</>
+        </Accordion>
 
-      <div className="mt-12">
-        <h1 className="text-xl font-semibold text-gray-500">
-          {selectedType} QR Code
-        </h1>
+        <Accordion
+          title="Shape & Color"
+          isOpen={openIndex === 2}
+          onClick={() => handleAccordionClick(2)}>
+          <>Test</>
+        </Accordion>
 
-        {selectedType === 'URL' && <URLInput />}
+        <Accordion
+          title="Logo"
+          isOpen={openIndex === 3}
+          onClick={() => handleAccordionClick(3)}>
+          <>Test</>
+        </Accordion>
       </div>
+      <QRCodeAction />
     </>
   );
 }

@@ -1,8 +1,8 @@
 import { useQRCode } from '@/hooks/use-qrcode';
 import { FormEvent } from 'react';
-import LoadingButton from '../ui/loading-button';
+import Button from '../ui/button';
 
-export default function URLInput() {
+export default function URLType() {
   const { setQrCodeInput } = useQRCode();
 
   // Generate QR Code
@@ -13,8 +13,6 @@ export default function URLInput() {
     const formData = new FormData(target);
     const url = formData.get('url') as string;
     setQrCodeInput(url);
-
-    target.reset();
   };
 
   return (
@@ -27,7 +25,7 @@ export default function URLInput() {
         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent"
       />
 
-      <LoadingButton type="submit">Generate QR Code</LoadingButton>
+      <Button />
     </form>
   );
 }
