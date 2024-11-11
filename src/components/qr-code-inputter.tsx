@@ -5,7 +5,8 @@ import EmailType from './qr-code-type/email-type';
 import SmsType from './qr-code-type/sms-type';
 import TextType from './qr-code-type/text-type';
 import URLType from './qr-code-type/url-type';
-import VcardType from './qr-code-type/vcard-type';
+import VCardType from './qr-code-type/vcard-type';
+import WiFiType from './qr-code-type/wifi-type';
 
 export default function QRCodeInputter() {
   const [qrCodeType, setQrCodeType] = useState('URL');
@@ -37,10 +38,11 @@ export default function QRCodeInputter() {
         </h1>
 
         {qrCodeType === 'URL' && <URLType />}
-        {qrCodeType === 'VCARD' && <VcardType />}
+        {qrCodeType === 'VCARD' && <VCardType />}
         {qrCodeType === 'TEXT' && <TextType />}
         {qrCodeType === 'E-MAIL' && <EmailType />}
         {qrCodeType === 'SMS' && <SmsType />}
+        {qrCodeType === 'WiFi' && <WiFiType />}
       </div>
     </>
   );

@@ -1,8 +1,9 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../ui/button';
 
 export default function SmsType() {
+  const [isDirty, setIsDirty] = useState(false);
   const { setQrCodeInput } = useQRCode();
 
   // Generate QR Code
@@ -17,6 +18,21 @@ export default function SmsType() {
     const sms = `sms:${number}?body=${message}`;
 
     setQrCodeInput(sms);
+    setIsDirty(false);
+  };
+
+  // Handle input change and set isDirty state
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const value = e.target.value;
+
+    if (!value) {
+      setIsDirty(false);
+      return;
+    }
+
+    setIsDirty(true);
   };
 
   return (
@@ -24,7 +40,8 @@ export default function SmsType() {
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-col gap-10">
           <input
-            type="number"
+            onChange={handleInputChange}
+            type="text"
             name="number"
             placeholder="Your phone number"
             required
@@ -32,6 +49,7 @@ export default function SmsType() {
           />
 
           <textarea
+            onChange={handleInputChange}
             name="message"
             placeholder="Enter your text here"
             required
@@ -40,7 +58,7 @@ export default function SmsType() {
         </div>
       </div>
 
-      <Button />
+      <Button disabled={!isDirty}>Generate QR Code</Button>
     </form>
   );
 }

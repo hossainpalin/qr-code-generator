@@ -1,8 +1,9 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../ui/button';
 
-export default function VcardType() {
+export default function VCardType() {
+  const [isDirty, setIsDirty] = useState(false);
   const { setQrCodeInput } = useQRCode();
 
   // Generate QR Code
@@ -44,6 +45,19 @@ END:VCARD
 `.trim();
 
     setQrCodeInput(vCardData);
+    setIsDirty(false);
+  };
+
+  // Handle input change and set isDirty state
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (!value) {
+      setIsDirty(false);
+      return;
+    }
+
+    setIsDirty(true);
   };
 
   return (
@@ -57,6 +71,7 @@ END:VCARD
         </label>
         <div className="w-full flex gap-10">
           <input
+            onChange={handleInputChange}
             type="text"
             name="first-name"
             placeholder="First name"
@@ -64,6 +79,7 @@ END:VCARD
           />
 
           <input
+            onChange={handleInputChange}
             type="text"
             name="last-name"
             placeholder="Last name"
@@ -82,6 +98,7 @@ END:VCARD
 
         <div className="w-full flex flex-col gap-4">
           <input
+            onChange={handleInputChange}
             type="text"
             name="mobile"
             placeholder="Mobile number"
@@ -90,6 +107,7 @@ END:VCARD
 
           <div className="w-full flex gap-10">
             <input
+              onChange={handleInputChange}
               type="text"
               name="phone"
               placeholder="Phone number"
@@ -97,6 +115,7 @@ END:VCARD
             />
 
             <input
+              onChange={handleInputChange}
               type="text"
               name="fax"
               placeholder="Fax number"
@@ -115,6 +134,7 @@ END:VCARD
         </label>
 
         <input
+          onChange={handleInputChange}
           type="email"
           name="email"
           placeholder="Email address"
@@ -132,6 +152,7 @@ END:VCARD
 
         <div className="w-full flex gap-10">
           <input
+            onChange={handleInputChange}
             type="text"
             name="company"
             placeholder="Company name"
@@ -139,6 +160,7 @@ END:VCARD
           />
 
           <input
+            onChange={handleInputChange}
             type="text"
             name="job-title"
             placeholder="Job title"
@@ -156,6 +178,7 @@ END:VCARD
         </label>
 
         <input
+          onChange={handleInputChange}
           type="text"
           name="street"
           placeholder="Street address"
@@ -173,6 +196,7 @@ END:VCARD
 
         <div className="w-full flex gap-10">
           <input
+            onChange={handleInputChange}
             type="text"
             name="city"
             placeholder="City"
@@ -180,6 +204,7 @@ END:VCARD
           />
 
           <input
+            onChange={handleInputChange}
             type="text"
             name="zip"
             placeholder="Zip code"
@@ -197,6 +222,7 @@ END:VCARD
         </label>
 
         <input
+          onChange={handleInputChange}
           type="text"
           name="state"
           placeholder="State"
@@ -213,6 +239,7 @@ END:VCARD
         </label>
 
         <input
+          onChange={handleInputChange}
           type="text"
           name="country"
           placeholder="Country"
@@ -229,6 +256,7 @@ END:VCARD
         </label>
 
         <input
+          onChange={handleInputChange}
           type="text"
           name="website"
           placeholder="Website URL"
@@ -236,7 +264,7 @@ END:VCARD
         />
       </div>
 
-      <Button />
+      <Button disabled={!isDirty}>Generate QR Code</Button>
     </form>
   );
 }

@@ -1,8 +1,9 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../ui/button';
 
 export default function EmailType() {
+  const [isDirty, setIsDirty] = useState(false);
   const { setQrCodeInput } = useQRCode();
 
   // Generate QR Code
@@ -18,6 +19,21 @@ export default function EmailType() {
     const url = `mailto:${email}?subject=${subject}&body=${message}`;
 
     setQrCodeInput(url);
+    setIsDirty(false);
+  };
+
+  // Handle input change and set isDirty state
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const value = e.target.value;
+
+    if (!value) {
+      setIsDirty(false);
+      return;
+    }
+
+    setIsDirty(true);
   };
 
   return (
@@ -25,6 +41,7 @@ export default function EmailType() {
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-col gap-10">
           <input
+            onChange={handleInputChange}
             type="email"
             name="email"
             placeholder="Your email"
@@ -33,6 +50,7 @@ export default function EmailType() {
           />
 
           <input
+            onChange={handleInputChange}
             type="text"
             name="subject"
             placeholder="Enter email subject"
@@ -41,6 +59,7 @@ export default function EmailType() {
           />
 
           <textarea
+            onChange={handleInputChange}
             name="message"
             placeholder="Enter your message"
             required
@@ -49,7 +68,7 @@ export default function EmailType() {
         </div>
       </div>
 
-      <Button />
+      <Button disabled={!isDirty}>Generate QR Code</Button>
     </form>
   );
 }

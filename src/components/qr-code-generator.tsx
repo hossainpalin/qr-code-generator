@@ -1,8 +1,8 @@
 import { useQRCode } from '@/hooks/use-qrcode';
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
-import Accordion from './ui/accordion';
 import QRCodeAction from './qr-code-action';
+import Accordion from './ui/accordion';
 
 export default function QRCodeGenerator() {
   const [openIndex, setOpenIndex] = useState<number | null>(1);
@@ -19,8 +19,12 @@ export default function QRCodeGenerator() {
 
   return (
     <>
-      <div className="w-full bg-blue-100 rounded-lg justify-center items-center flex p-8">
-        <QRCodeSVG value={qrCodeInput} size={180} />
+      <div className="w-full bg-gray-200 rounded-lg justify-center items-center flex p-8">
+        <QRCodeSVG
+          value={qrCodeInput}
+          size={180}
+          bgColor={'rgba(0, 0, 0, 0)'}
+        />
       </div>
       <div className="w-full my-5 flex flex-col gap-3">
         <Accordion
