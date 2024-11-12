@@ -1,4 +1,15 @@
-import { AtSign, Bitcoin, FileText, IdCard, LayoutGrid, Link, Mail, ServerCrash, ThumbsUp, Twitter, Wifi } from 'lucide-react';
+import {
+  AtSign,
+  Bitcoin,
+  Calendar,
+  FileText,
+  IdCard,
+  Link,
+  Mail,
+  ServerCrash,
+  Twitter,
+  Wifi
+} from 'lucide-react';
 
 export const data = [
   {
@@ -43,18 +54,13 @@ export const data = [
   },
   {
     id: 9,
-    label: 'FACEBOOK',
-    icon: ThumbsUp
+    label: 'EVENT',
+    icon: Calendar
   },
   {
     id: 10,
     label: 'DRIVE',
     icon: ServerCrash
-  },
-  {
-    id: 11,
-    label: 'APP STORE',
-    icon: LayoutGrid
   }
 ];
 

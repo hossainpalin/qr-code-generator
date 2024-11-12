@@ -1,12 +1,16 @@
 import { data, QRMode } from '@/data';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import BitcoinType from './qr-code-type/bitcoin-type';
+import DriveType from './qr-code-type/drive-type';
 import EmailType from './qr-code-type/email-type';
 import SmsType from './qr-code-type/sms-type';
 import TextType from './qr-code-type/text-type';
+import TwitterType from './qr-code-type/twitter-type';
 import URLType from './qr-code-type/url-type';
 import VCardType from './qr-code-type/vcard-type';
 import WiFiType from './qr-code-type/wifi-type';
+import EventType from './qr-code-type/event-type';
 
 export default function QRCodeInputter() {
   const [qrCodeType, setQrCodeType] = useState('URL');
@@ -43,6 +47,10 @@ export default function QRCodeInputter() {
         {qrCodeType === 'E-MAIL' && <EmailType />}
         {qrCodeType === 'SMS' && <SmsType />}
         {qrCodeType === 'WiFi' && <WiFiType />}
+        {qrCodeType === 'BITCOIN' && <BitcoinType />}
+        {qrCodeType === 'TWITTER' && <TwitterType />}
+        {qrCodeType === 'EVENT' && <EventType />}
+        {qrCodeType === 'DRIVE' && <DriveType />}
       </div>
     </>
   );
