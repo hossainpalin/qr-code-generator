@@ -1,10 +1,10 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '../ui/button';
 
 export default function WiFiType() {
   const [isDirty, setIsDirty] = useState(false);
-  const { setQrCodeInput } = useQRCode();
+  const { qrCode, QRCodeOptions, setQRCodeOptions } = useQRCode();
 
   // Generate QR Code
   const generateQRCode = (e: FormEvent) => {
@@ -20,7 +20,7 @@ export default function WiFiType() {
 
     const wifiData = `WIFI:T:${encryption};S:${ssid};P:${password};H:${hidden ? 'true' : 'false'};;`;
 
-    setQrCodeInput(wifiData);
+    setQRCodeOptions({ ...QRCodeOptions, data: wifiData });
     setIsDirty(false);
   };
 
@@ -44,6 +44,12 @@ export default function WiFiType() {
 
     setIsDirty(true);
   };
+
+  useEffect(() => {
+    if (!qrCode) return;
+
+    qrCode.update(QRCodeOptions);
+  }, [QRCodeOptions, qrCode]);
 
   return (
     <form onSubmit={generateQRCode} className="mt-4 flex flex-col gap-5">

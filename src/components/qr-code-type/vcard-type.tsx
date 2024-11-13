@@ -1,10 +1,10 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '../ui/button';
 
 export default function VCardType() {
   const [isDirty, setIsDirty] = useState(false);
-  const { setQrCodeInput } = useQRCode();
+  const { qrCode, QRCodeOptions, setQRCodeOptions } = useQRCode();
 
   // Generate QR Code
   const generateQRCode = (e: FormEvent) => {
@@ -44,7 +44,7 @@ URL:${website}
 END:VCARD
 `.trim();
 
-    setQrCodeInput(vCardData);
+    setQRCodeOptions({ ...QRCodeOptions, data: vCardData });
     setIsDirty(false);
   };
 
@@ -59,6 +59,12 @@ END:VCARD
 
     setIsDirty(true);
   };
+
+  useEffect(() => {
+    if (!qrCode) return;
+
+    qrCode.update(QRCodeOptions);
+  }, [QRCodeOptions, qrCode]);
 
   return (
     <form onSubmit={generateQRCode} className="mt-4 flex flex-col gap-5">

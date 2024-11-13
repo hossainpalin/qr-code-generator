@@ -1,8 +1,10 @@
+import QRCodeStyling, { Options } from 'qr-code-styling';
 import { createContext } from 'react';
 
 export interface QRCodeContextType {
-  qrCodeInput: string | string[];
-  setQrCodeInput: (value: string | string[]) => void;
+  QRCodeOptions: Options;
+  setQRCodeOptions: (options: Options) => void;
+  qrCode: QRCodeStyling;
 }
 
 export const QRCodeContext = createContext<QRCodeContextType | null>(null);

@@ -1,11 +1,11 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '../ui/button';
 
 export default function TwitterType() {
   const [isDirty, setIsDirty] = useState(false);
   const [twitterOption, setTwitterOption] = useState('profile');
-  const { setQrCodeInput } = useQRCode();
+  const { qrCode, QRCodeOptions, setQRCodeOptions } = useQRCode();
 
   // Generate QR Code
   const generateQRCode = (e: FormEvent) => {
@@ -23,7 +23,7 @@ export default function TwitterType() {
         ? `https://twitter.com/${username}`
         : `https://twitter.com/intent/tweet?text=${tweet}`;
 
-    setQrCodeInput(twitterData);
+    setQRCodeOptions({ ...QRCodeOptions, data: twitterData });
     setIsDirty(false);
   };
 
@@ -46,6 +46,12 @@ export default function TwitterType() {
     const value = e.target.value;
     setTwitterOption(value);
   };
+
+  useEffect(() => {
+    if (!qrCode) return;
+
+    qrCode.update(QRCodeOptions);
+  }, [QRCodeOptions, qrCode]);
 
   return (
     <form onSubmit={generateQRCode} className="mt-4 flex flex-col gap-5">

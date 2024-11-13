@@ -1,10 +1,10 @@
 import { useQRCode } from '@/hooks/use-qrcode';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '../ui/button';
 
 export default function URLType() {
   const [isDirty, setIsDirty] = useState(false);
-  const { setQrCodeInput } = useQRCode();
+  const { qrCode, QRCodeOptions, setQRCodeOptions } = useQRCode();
 
   // Generate QR Code
   const generateQRCode = (e: FormEvent) => {
@@ -13,7 +13,8 @@ export default function URLType() {
 
     const formData = new FormData(target);
     const url = formData.get('url') as string;
-    setQrCodeInput(url);
+
+    setQRCodeOptions({ ...QRCodeOptions, data: url });
     setIsDirty(false);
   };
 
@@ -28,6 +29,12 @@ export default function URLType() {
 
     setIsDirty(true);
   };
+
+  useEffect(() => {
+    if (!qrCode) return;
+
+    qrCode.update(QRCodeOptions);
+  }, [QRCodeOptions, qrCode]);
 
   return (
     <form onSubmit={generateQRCode} className="mt-4 flex flex-col gap-5">

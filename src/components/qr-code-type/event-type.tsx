@@ -1,11 +1,11 @@
 import { useQRCode } from '@/hooks/use-qrcode';
 import { convertToUTC } from '@/lib/utils';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Button from '../ui/button';
 
 export default function EventType() {
   const [isDirty, setIsDirty] = useState(false);
-  const { setQrCodeInput } = useQRCode();
+  const { qrCode, QRCodeOptions, setQRCodeOptions } = useQRCode();
 
   // Generate QR Code
   const generateQRCode = (e: FormEvent) => {
@@ -35,7 +35,7 @@ END:VEVENT
 END:VCALENDAR
 `.trim();
 
-    setQrCodeInput(eventData);
+    setQRCodeOptions({ ...QRCodeOptions, data: eventData });
     setIsDirty(false);
   };
 
@@ -52,6 +52,12 @@ END:VCALENDAR
 
     setIsDirty(true);
   };
+
+  useEffect(() => {
+    if (!qrCode) return;
+
+    qrCode.update(QRCodeOptions);
+  }, [QRCodeOptions, qrCode]);
 
   return (
     <form onSubmit={generateQRCode} className="mt-4 flex flex-col gap-5">
