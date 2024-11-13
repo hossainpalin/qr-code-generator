@@ -17,8 +17,8 @@ interface QRCodeProviderProps {
 
 export function QrCodeProvider({ children }: QRCodeProviderProps) {
   const [QRCodeOptions, setQRCodeOptions] = useState<Options>({
-    width: 250,
-    height: 250,
+    width: 230,
+    height: 230,
     type: 'svg' as DrawType,
     data: 'qr-code-generator',
     image: '',
