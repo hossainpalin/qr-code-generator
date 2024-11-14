@@ -22,7 +22,7 @@ export function QrCodeProvider({ children }: QRCodeProviderProps) {
     type: 'svg' as DrawType,
     data: 'qr-code-generator',
     image: '',
-    margin: 0,
+    margin: 5,
     qrOptions: {
       typeNumber: 0 as TypeNumber,
       mode: 'Byte' as Mode,

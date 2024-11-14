@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@simonwep/pickr": "^1.9.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.454.0",
     "qr-code-styling": "^1.8.4",
