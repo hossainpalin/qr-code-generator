@@ -30,7 +30,7 @@ export function QrCodeProvider({ children }: QRCodeProviderProps) {
     },
     imageOptions: {
       hideBackgroundDots: true,
-      imageSize: 0.5,
+      imageSize: 0.7,
       margin: 10,
       crossOrigin: 'anonymous'
     },
@@ -47,7 +47,7 @@ export function QrCodeProvider({ children }: QRCodeProviderProps) {
     },
     cornersDotOptions: {
       color: '#151515',
-      type: 'square' as CornerDotType
+      type: '' as CornerDotType
     }
   });
   const [qrCode] = useState<QRCodeStyling>(new QRCodeStyling(QRCodeOptions));

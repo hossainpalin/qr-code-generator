@@ -71,5 +71,5 @@ export default function ColorPicker({ color, setColor }: ColorPickerProps) {
     pickrRef.current?.setColor(color);
   }, [color]);
 
-  return <div className="w-2" ref={ref} />;
+  return <div title="Color" className="w-2" ref={ref} />;
 }

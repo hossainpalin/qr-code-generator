@@ -1,8 +1,10 @@
 import { useQRCode } from '@/hooks/use-qrcode';
 import { useEffect, useRef, useState } from 'react';
 import QRCodeAction from './qr-code-action';
+import QRCodeConnerDotsOptions from './qrcode-conner-dots-options';
 import QRCodeDotsOptions from './qrcode-dots-options';
 import QRCodeLogo from './qrcode-logo';
+import QRCodeSquareOptions from './qrcode-square-options';
 import Accordion from './ui/accordion';
 
 export default function QRCodeGenerator() {
@@ -44,17 +46,17 @@ export default function QRCodeGenerator() {
         </Accordion>
 
         <Accordion
-          title="Corners Options"
+          title="Corners Square Options"
           isOpen={openIndex === 2}
           onClick={() => handleAccordionClick(2)}>
-          <>Test</>
+          <QRCodeSquareOptions />
         </Accordion>
 
         <Accordion
           title="Corners Dot Options"
           isOpen={openIndex === 3}
           onClick={() => handleAccordionClick(3)}>
-          <>Test</>
+          <QRCodeConnerDotsOptions />
         </Accordion>
 
         <Accordion

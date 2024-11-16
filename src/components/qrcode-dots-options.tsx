@@ -1,9 +1,9 @@
-import ClassyRounded from '@/assets/classy-rounded.png';
-import Classy from '@/assets/classy.png';
-import Dots from '@/assets/dots.png';
-import ExtraRounded from '@/assets/extra-rounded.png';
-import Rounded from '@/assets/rounded.png';
-import Square from '@/assets/square.png';
+import ClassyRounded from '@/assets/dots-options/classy-rounded.png';
+import Classy from '@/assets/dots-options/classy.png';
+import Dots from '@/assets/dots-options/dots.png';
+import ExtraRounded from '@/assets/dots-options/extra-rounded.png';
+import Rounded from '@/assets/dots-options/rounded.png';
+import Square from '@/assets/dots-options/square.png';
 import { useQRCode } from '@/hooks/use-qrcode';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
