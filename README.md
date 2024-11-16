@@ -35,7 +35,7 @@ http://localhost:5173
 
 ## Application Features
 
-Short description for application features
+This tool is perfect for businesses, marketers, and developers looking to create branded, dynamic, and visually appealing QR codes for various use cases like product links, contact details, event invitations, and more.
 
 - QR Code Color Customization: Users can customize the foreground and background colors of the QR code to match their brand or personal preferences. The color picker offers a wide range of options for both the main QR code and its background.
 - Logo Upload and Integration: Allows users to upload a custom logo or image to be placed in the center of the QR code. This helps businesses integrate their branding directly into the QR code, making it more visually appealing and recognizable
